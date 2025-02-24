@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Tourism</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-color: #ff6f61; /* Coral */
+            --secondary-color: #4a90e2; /* Blue */
+            --accent-color: #ffcc00; /* Yellow */
+            --background-light: #f4f4f4;
+            --text-light: #333;
+            --background-dark: #1e1e1e;
+            --text-dark: #f4f4f4;
+            --card-bg-light: #fff;
+            --card-bg-dark: #2c2c2c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-toggle {
+            display: none;
+        }
+
+        .theme-label {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-label:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .theme-toggle:checked ~ .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('banner.jpg') no-repeat center center/cover;
+        }
+
+        .theme-toggle:checked ~ * {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:checked ~ .videos,
+        .theme-toggle:checked ~ .faq {
+            background-color: var(--card-bg-dark);
+        }
+
+        .theme-toggle:checked ~ footer {
+            background-color: var(--secondary-color);
+        }
+
+        /* Header Navigation Bar */
+        .header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('banner.jpeg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+            margin-bottom: 40px;
+        }
+
+        .banner h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner p {
+            font-size: 1.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-buttons {
+            margin-top: 30px;
+        }
+
+        .banner-buttons button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .banner-buttons button:first-child {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .banner-buttons button:last-child {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .banner-buttons button:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Popular Destinations Section */
+        .destinations {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        }
+
+        .destinations h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .destination-card {
+            background-color: var(--card-bg-light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destination-info {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .destination-info h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: var(--primary-color);
+        }
+
+        .destination-info p {
+            margin: 10px 0;
+            color: var(--text-light);
+        }
+
+        .destination-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .destination-info ul li {
+            margin: 5px 0;
+            color: var(--secondary-color);
+        }
+
+        /* Dark Theme Adjustments */
+        .theme-toggle:checked ~ .destinations .destination-card {
+            background-color: var(--card-bg-dark);
+        }
+
+        .theme-toggle:checked ~ .destinations .destination-info p {
+            color: var(--text-dark);
+        }
+
+        /* Slider Section */
+        .slider {
+            width: 90%;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            position: relative;
+            width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .review {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .review p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .review span {
+            font-size: 14px;
+            color: var(--accent-color);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 40px 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-item h3 {
+            margin: 0;
+            font-size: 1.3em;
+            color: var(--accent-color);
+        }
+
+        .faq-item p {
+            margin: 10px 0 0;
+            color: white;
+        }
+
+        /* Photos Section */
+        .photos {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .photos h2 {
+            color: white;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Videos Section */
+        .videos {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+        }
+
+        .videos h2 {
+            color: white;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .video-container iframe {
+            width: 45%;
+            height: 315px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Switch -->
+    <input type="checkbox" id="theme-toggle" class="theme-toggle">
+    <label for="theme-toggle" class="theme-label">🌙 Dark Mode</label>
+
+    <!-- Header Navigation Bar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Travel & Tourism</div>
+            <ul class="nav-links">
+                <li><a href="Destination.html">Destination</a></li>
+                <li><a href="booking.html">Booking</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <!-- Add Profile Button -->
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <h1>Welcome to Travel & Tourism</h1>
+        <p>Explore the world with us!</p>
+        <div class="banner-buttons">
+            <a href="booking.html"></a><button>Book Now</button>
+            <a href="destination.html"></a><button>Explore More</button>
+        </div>
+    </section>
+
+    <!-- Popular Destinations Section -->
+    <section class="destinations">
+        <h2>Popular Travel Destinations</h2>
+        <div class="destination-grid">
+            <!-- Destination 1 -->
+            <div class="destination-card">
+                <img src="Paris.jpg" alt="Paris">
+                <div class="destination-info">
+                    <h3>Paris, France</h3>
+                    <p>Paris, the City of Light, is famous for its art, fashion, and culture. Visit the Eiffel Tower, Louvre Museum, and enjoy delicious French cuisine.</p>
+                    <ul>
+                        <li>Eiffel Tower</li>
+                        <li>Louvre Museum</li>
+                        <li>Notre-Dame Cathedral</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Destination 2 -->
+            <div class="destination-card">
+                <img src="koyto.webp" alt="Kyoto">
+                <div class="destination-info">
+                    <h3>Kyoto, Japan</h3>
+                    <p>Kyoto is known for its traditional temples, gardens, and geisha culture. Explore Fushimi Inari Shrine, Kinkaku-ji, and Arashiyama Bamboo Grove.</p>
+                    <ul>
+                        <li>Fushimi Inari Shrine</li>
+                        <li>Kinkaku-ji (Golden Pavilion)</li>
+                        <li>Arashiyama Bamboo Grove</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Destination 3 -->
+            <div class="destination-card">
+                <img src="NY.jpg" alt="New York">
+                <div class="destination-info">
+                    <h3>New York, USA</h3>
+                    <p>New York City is a bustling metropolis with iconic landmarks like Times Square, Central Park, and the Statue of Liberty.</p>
+                    <ul>
+                        <li>Times Square</li>
+                        <li>Central Park</li>
+                        <li>Statue of Liberty</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Destination 4 -->
+            <div class="destination-card">
+                <img src="sentorini.jpg" alt="Santorini">
+                <div class="destination-info">
+                    <h3>Santorini, Greece</h3>
+                    <p>Santorini is famous for its stunning sunsets, white-washed buildings, and crystal-clear waters. Perfect for a romantic getaway.</p>
+                    <ul>
+                        <li>Oia Village</li>
+                        <li>Red Beach</li>
+                        <li>Santorini Caldera</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revised Slider Section -->
+    <section class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="H1.jpg" alt="Travel Image 1">
+                <div class="review">
+                    <p>"Amazing experience! The beaches were breathtaking."</p>
+                    <span>- John Doe</span>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="H2.webp" alt="Travel Image 2">
+                <div class="review">
+                    <p>"The mountains were stunning. Highly recommended!"</p>
+                    <span>- Jane Smith</span>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="H3.jpg" alt="Travel Image 3">
+                <div class="review">
+                    <p>"The cultural tours were enlightening and fun."</p>
+                    <span>- Mike Johnson</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>What is the best time to travel?</h3>
+            <p>The best time to travel depends on your destination. Generally, spring and fall offer pleasant weather.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do I need a visa?</h3>
+            <p>Visa requirements vary by country. Please check with the embassy of your destination country.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What should I pack?</h3>
+            <p>Pack according to the weather and activities planned. Always bring comfortable shoes and essential documents.</p>
+        </div>
+    </section>
+
+    <!-- Photos Section -->
+    <section class="photos">
+        <h2>Travel Photos</h2>
+        <div class="photo-gallery">
+            <img src="i1.jpg" alt="Photo 1">
+            <img src="i2.jpg" alt="Photo 2">
+            <img src="i3.jpg" alt="Photo 3">
+            <img src="H1.jpg" alt="Photo 4">
+            <img src="i5.jpg" alt="Photo 5">
+            <img src="i6.jpg" alt="Photo 6">
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="videos">
+        <h2>Travel Videos</h2>
+        <div class="video-container">
+            <iframe src="v1.mp4" controls allowfullscreen></iframe>
+            <iframe src="v2.mp4" controls allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Travel & Tourism. All rights reserved.</p>
+    </footer>
+</body>
+</html>

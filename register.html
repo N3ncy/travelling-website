@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Travel & Tourism</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        /* Registration Container */
+        .register-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #ff6f61;
+        }
+
+        .register-container p {
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        /* Back to Home Button */
+        .back-to-home {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-home:hover {
+            background-color: #4a90e2;
+        }
+
+        /* Registration Form */
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .register-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .register-form input:focus {
+            outline: none;
+            border-color: #ff6f61;
+        }
+
+        .register-form button {
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-form button:hover {
+            background-color: #4a90e2;
+        }
+
+        /* Social Registration Buttons */
+        .social-register {
+            margin-top: 20px;
+        }
+
+        .social-register p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .social-buttons button:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-buttons button.google {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .social-buttons button.facebook {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        /* Login Link */
+        .login-link {
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Registration Container -->
+    <div class="register-container">
+        <!-- Back to Home Button -->
+        <button class="back-to-home" onclick="window.location.href='index.html'">Back to Home</button>
+
+        <h2>Create Your Account</h2>
+        <p>Join us and start your journey today!</p>
+
+        <!-- Registration Form -->
+        <form class="register-form">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Social Registration -->
+        <div class="social-register">
+            <p>Or register with:</p>
+            <div class="social-buttons">
+                <button class="google">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" width="24">
+                    Google
+                </button>
+                <button class="facebook">
+                    <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="24">
+                    Facebook
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Link -->
+        <div class="login-link">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+</body>
+</html>
